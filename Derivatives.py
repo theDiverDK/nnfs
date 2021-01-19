@@ -9,35 +9,35 @@ def f(x):
 x = np.arange(0, 5, 0.001)
 y = f(x)
 
-plt.plot(x, y)
-
-# print(x)
-# print(y)
-
-# print((y[1] - y[0]) / (x[1] - x[0]))
-# print((y[3] - y[2]) / (x[3] - x[2]))
-
-p2_delta = 0.0001
-x1 = 2
-x2 = x1 + p2_delta
-
-y1 = f(x1)
-y2 = f(x2)
-
-print((x1, y1), (x2, y2))
-
-approximate_derivative = (y2 - y1) / (x2 - x1)
-b = y2 - approximate_derivative * x2
+colors = ['k', 'g', 'r', 'b', 'c']
 
 
-def tangent_lin(x):
-    return approximate_derivative * x + b
+def approximate_tangent_line(x, approximate_derivative):
+    return (approximate_derivative * x) + b
 
 
-to_plot = [x1 - 0.9, x1, x1 + 0.9]
-plt.plot(to_plot, [tangent_lin(i) for i in to_plot])
+for i in range(5):
+    p2_delta = 0.0001
+    x1 = i
+    x2 = x1 + p2_delta
 
-print('Approximate derivative for f(x)',
-      f'where x= {x1} is {approximate_derivative}')
+    y1 = f(x1)
+    y2 = f(x2)
+
+    print((x1, y1), (x2, y2))
+
+    approximate_derivative = (y2 - y1) / (x2 - x1)
+    b = y2 - approximate_derivative * x2
+
+    to_plot = [x1 - 0.9, x1, x1 + 0.9]
+    plt.scatter(x1, y1, c=colors[i])
+
+    plt.plot([point for point in to_plot],
+             [approximate_tangent_line(point, approximate_derivative)
+              for point in to_plot],
+             c=colors[i])
+
+    print('Approximate derivative for f(x)',
+          f'where x= {x1} is {approximate_derivative}')
 
 plt.show()
