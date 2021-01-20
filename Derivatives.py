@@ -9,7 +9,7 @@ def f(x):
 x = np.arange(0, 5, 0.001)
 y = f(x)
 
-plt.plot(x,y)
+plt.plot(x, y)
 
 colors = ['k', 'g', 'r', 'b', 'c']
 
